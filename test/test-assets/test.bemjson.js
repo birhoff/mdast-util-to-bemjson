@@ -33,6 +33,9 @@ module.exports = {
             content: {
                 elem: 'code',
                 content: '{\n  block: &#39;widgets&#39;,\n  content: [\n    {\n      elem: &#39;weather&#39;,\n      content: 4\n    }\n  ]\n}\n'
+            },
+            mods: {
+                lang: 'js'
             }
         }]
 };

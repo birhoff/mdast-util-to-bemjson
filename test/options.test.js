@@ -54,5 +54,19 @@ describe('Test converter options', () => {
             });
         });
 
+        it('should converts mods to elemMods with `options.scope=true`', () => {
+            const tree = processor.parse('```javascript \n var p = null; \n ```');
+            const bjson = toBemjson(tree, { scope: true, root: 'myBlock' });
+
+            expect(bjson).to.deep.equal({
+                block: 'myBlock',
+                content: {
+                    content: { elem: 'code', content: ' var p = null; \n' },
+                    elem: 'blockcode',
+                    elemMods: { lang: 'javascript' }
+                }
+            });
+        });
+
     });
 });
