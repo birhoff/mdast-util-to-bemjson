@@ -32,6 +32,13 @@ describe('Test node handlers', () => {
         });
     });
 
+    it('should not add tag to `html`', () => {
+        const tree = { type: 'html', value: 'some html' };
+        const bjson = toBemjson(tree, { tag: true });
+
+        expect(bjson).to.deep.equal({ block: 'html', content: 'some html' });
+    });
+
     describe('Test `default` handler', () => {
         it('should convert `unknown` node to block', () => {
             const tree = { type: 'unknown' };
