@@ -28,43 +28,27 @@ describe('Test converter options', () => {
 
     describe('Test options.scope', () => {
 
-        it('should `options.scope=false` convert `heading` to `block: heading`', () => {
-            const tree = processor.parse('# My heading');
+        it('should convert node to block with `options.scope=false`', () => {
+            const tree = { type: 'unknown' };
             const bjson = toBemjson(tree);
 
-            expect(bjson).to.deep.equal({
-                block: 'documentation',
-                content: {
-                    block: 'heading',
-                    content: 'My heading'
-                }
-            });
+            expect(bjson).to.deep.equal({ block: 'unknown' });
         });
 
-        it('should `options.scope=true` convert `heading` to `elem: heading`', () => {
-            const tree = processor.parse('# My heading');
+        it('should convert node to elem with `options.scope=true`', () => {
+            const tree = { type: 'unknown' };
             const bjson = toBemjson(tree, { scope: true, root: 'myBlock' });
 
-            expect(bjson).to.deep.equal({
-                block: 'myBlock',
-                content: {
-                    elem: 'heading',
-                    content: 'My heading'
-                }
-            });
+            expect(bjson).to.deep.equal({ elem: 'unknown' });
         });
 
         it('should converts mods to elemMods with `options.scope=true`', () => {
-            const tree = processor.parse('```javascript \n var p = null; \n ```');
+            const tree = { type: 'heading', depth: 1 };
             const bjson = toBemjson(tree, { scope: true, root: 'myBlock' });
 
             expect(bjson).to.deep.equal({
-                block: 'myBlock',
-                content: {
-                    content: { elem: 'code', content: ' var p = null; \n' },
-                    elem: 'blockcode',
-                    elemMods: { lang: 'javascript' }
-                }
+                elem: 'heading',
+                elemMods: { level: 1 }
             });
         });
 

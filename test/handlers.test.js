@@ -20,16 +20,10 @@ describe('Test node handlers', () => {
     });
 
     it('should not convert `text` as block', () => {
-        const tree = processor.parse('# My heading');
+        const tree = { type: 'text', value: 'my-text' };
         const bjson = toBemjson(tree);
 
-        expect(bjson).to.deep.equal({
-            block: 'documentation',
-            content: {
-                block: 'heading',
-                content: 'My heading'
-            }
-        });
+        expect(bjson).to.deep.equal('my-text');
     });
 
     it('should not add tag to `html`', () => {
@@ -79,7 +73,7 @@ describe('Test node handlers', () => {
         });
     });
 
-    describe('Test code handler', () => {
+    describe('Test `code` handler', () => {
         it('should convert `code` to `blockcode`', () => {
             const tree = processor.parse(fs.readFileSync(__dirname + '/test-assets/code/simple.md'));
             const bjson = toBemjson(tree);
@@ -139,6 +133,22 @@ describe('Test node handlers', () => {
                     content: 'var p = null;\n'
                 }
             });
+        });
+    });
+
+    describe('Test `heading` handler', () => {
+        it('should convert `heading` node to block', () => {
+            const tree = { type: 'heading', depth: 1 };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'heading', mods: { level: 1 } });
+        });
+
+        it('should convert `heading` node with `options.tag`', () => {
+            const tree = { type: 'heading', depth: 1 };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({ block: 'heading', mods: { level: 1 }, tag: 'h1' });
         });
     });
 });
