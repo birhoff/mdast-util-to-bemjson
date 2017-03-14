@@ -34,13 +34,10 @@ describe('Test converter options', () => {
 
             expect(bjson).to.deep.equal({
                 block: 'documentation',
-                content: [{
+                content: {
                     block: 'heading',
-                    content: [{
-                        block: 'text',
-                        content: 'My heading'
-                    }]
-                }]
+                    content: 'My heading'
+                }
             });
         });
 
@@ -50,15 +47,11 @@ describe('Test converter options', () => {
 
             expect(bjson).to.deep.equal({
                 block: 'myBlock',
-                content: [{
+                content: {
                     block: 'myBlock',
                     elem: 'heading',
-                    content: [{
-                        block: 'myBlock',
-                        elem: 'text',
-                        content: 'My heading'
-                    }]
-                }]
+                    content: 'My heading'
+                }
             });
         });
 

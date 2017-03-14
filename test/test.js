@@ -7,15 +7,9 @@ const toBemjson = require('../index');
 
 const processor = unified().use(markdown);
 
-describe('Test node handlers', () => {
-    it('should convert `root` to `documentation`', () => {
-        const tree = processor.parse('');
-        const bjson = toBemjson(tree);
+describe('Common tests', () => {
 
-        expect(bjson).to.deep.equal({ block: 'documentation' });
-    });
-
-    it('should not convert `text` as block', () => {
+    it('should not create array for content with 1 element', () => {
         const tree = processor.parse('# My heading');
         const bjson = toBemjson(tree);
 

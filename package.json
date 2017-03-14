@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.0",
-    "mdast-util-definitions": "^1.2.0"
+    "mdast-util-definitions": "^1.2.0",
+    "trim": "0.0.1"
   }
 }
