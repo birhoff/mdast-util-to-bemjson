@@ -29,7 +29,10 @@ module.exports = {
             content: 'BEMHTML представляет собой распространение БЭМ-методологии на еще одну технологию — HTML. БЭМ предлагает дизайнеру, разработчику интерфейса, JavaScript-программисту работать в терминах единой предметной области — блоков, элементов, модификаторов. BEMHTML позволяет HTML-верстальщику присоединиться к ним.'
         }, { block: 'heading', content: 'Примеры' },
         { block: 'paragraph', content: 'Данные (БЭМ-дерево), которые шаблонизатор принимает на вход:' }, {
-            block: 'code',
-            content: '{\n  block: \'widgets\',\n  content: [\n    {\n      elem: \'weather\',\n      content: 4\n    }\n  ]\n}'
+            block: 'blockcode',
+            content: {
+                elem: 'code',
+                content: '{\n  block: &#39;widgets&#39;,\n  content: [\n    {\n      elem: &#39;weather&#39;,\n      content: 4\n    }\n  ]\n}\n'
+            }
         }]
 };

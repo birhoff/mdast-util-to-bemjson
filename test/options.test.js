@@ -48,7 +48,6 @@ describe('Test converter options', () => {
             expect(bjson).to.deep.equal({
                 block: 'myBlock',
                 content: {
-                    block: 'myBlock',
                     elem: 'heading',
                     content: 'My heading'
                 }
