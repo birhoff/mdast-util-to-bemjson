@@ -8,6 +8,7 @@ module.exports = {
                 { block: 'link', content: 'БЭМ-методологии' }, '.\nBEMHTML — это:']
         }, {
             block: 'list',
+            mods: { type: 'ul' },
             content: [{
                 block: 'listItem',
                 content: {

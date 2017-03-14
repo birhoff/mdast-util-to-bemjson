@@ -151,4 +151,41 @@ describe('Test node handlers', () => {
             expect(bjson).to.deep.equal({ block: 'heading', mods: { level: 1 }, tag: 'h1' });
         });
     });
+
+    describe('Test `list` handler', () => {
+        it('should convert to unordered list', () => {
+            const tree = { type: 'list', ordered: false };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'list', mods: { type: 'ul' } });
+        });
+
+        it('should convert to ordered list', () => {
+            const tree = { type: 'list', ordered: true };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'list', mods: { type: 'ol' } });
+        });
+
+        it('should convert to `tag:ul/ol` with `options.tag`', () => {
+            const tree = { type: 'list', ordered: true };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({ block: 'list', mods: { type: 'ol' }, tag: 'ol' });
+        });
+
+        it('should add `start` to properties', () => {
+            const tree = { type: 'list', ordered: false, start: 5 };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'list', mods: { type: 'ul' }, start: 5 });
+        });
+
+        it('should not add `start=1` to properties', () => {
+            const tree = { type: 'list', ordered: false, start: 1 };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'list', mods: { type: 'ul' } });
+        });
+    });
 });
