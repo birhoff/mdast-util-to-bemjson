@@ -213,4 +213,53 @@ describe('Test node handlers', () => {
             expect(bjson).to.deep.equal({ block: 'paragraph', tag: 'p' });
         });
     });
+
+    describe('Test `table` handler', () => {
+        it('should convert simple `table` with 2 rows', () => {
+            const tree = require('./test-assets/simple-table.mdast');
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal(require('./test-assets/simple-table.bemjson'));
+        });
+
+        it('should convert simple `table` with tags', () => {
+            const tree = require('./test-assets/simple-table.mdast');
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal(require('./test-assets/simple-table.tags.bemjson'));
+        });
+
+        it('should convert empty `table`', () => {
+            const tree = { type: 'table' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'table' });
+        });
+
+        it('should convert `table` without tbody', () => {
+            const tree = {
+                type: 'table',
+                children: [{
+                    type: 'tableRow',
+                    children: [{ type: 'tableCell', children: [{ type: 'text', value: 'my-cell' }] }]
+                }]
+            };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({
+                block: 'table',
+                content: [{
+                    elem: 'thead',
+                    content: { elem: 'row', content: [{ elem: 'th', content: 'my-cell' }] }
+                }]
+            });
+        });
+
+        it('should convert `table` with align', () => {
+            const tree = { type: 'table', align: ['top', 'left'] };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'table', align: ['top', 'left'] });
+        });
+    });
 });
