@@ -1,5 +1,5 @@
 # mdast-util-to-bemjson
-transforms mdast tree to bemjson tree
+Transforms MDAST tree to bemjson regarding to rules.
 
 [![NPM Status][npm-img]][npm]
 [![Travis Status][test-img]][travis]
@@ -21,6 +21,61 @@ transforms mdast tree to bemjson tree
 
 [greenkeeper]:    https://greenkeeper.io/
 [greenkeeper-img]:https://badges.greenkeeper.io/birhoff/mdast-util-to-bemjson.svg
+
+## Requirements
+
+* [Node.js 6+](https://nodejs.org/en/)
+
+## Install
+
+```sh
+$ npm install mdast-util-to-bemjson
+```
+
+## Usage
+
+```js
+const unified = require('unified');
+const markdown = require('remark-parse');
+const toBemjson = require('mdast-util-to-bemjson');
+
+const mdast = unified().use(markdown).parse('# Hello im _heading_');
+const bjson = toBemjson(mdast);
+
+console.log(JSON.stringify(bjson));
+
+// {
+//   "block": "documentation",
+//   "content": {
+//     "block": "heading",
+//     "mods": {
+//       "level": 1
+//     },
+//     "content": [
+//       "Hello im ",
+//       {
+//         "block": "emphasis",
+//         "content": "heading"
+//       }
+//     ]
+//   }
+// }
+```
+
+## API
+
+You can specify options with second arg.
+```javascript
+const toBemjson = require('mdast-util-to-bemjson');
+
+toBemjson({/* ...tree */}, {/* options */});
+```
+
+### Plugin options
+
+* *String|Object* **root** — Define block wrapper. Default — `documentation`.
+* *Boolean* **scope** — Define how to render nodes as blocks or elements. If `true` render as elements of `root` block. Default — `false`.
+* *Boolean* **tag** — Define render html tags to block. Default — `false`.
 
 
 License
