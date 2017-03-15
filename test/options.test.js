@@ -17,11 +17,11 @@ describe('Test converter options', () => {
             expect(bjson).to.deep.equal({ block: 'documentation' });
         });
 
-        it('should `options.root=myBlock` convert `root` to `myBlock`', () => {
+        it('should `options.root=myBlock` convert `root` to `my-block`', () => {
             const tree = processor.parse('');
-            const bjson = toBemjson(tree, { root: 'myBlock' });
+            const bjson = toBemjson(tree, { root: 'my-block' });
 
-            expect(bjson).to.deep.equal({ block: 'myBlock' });
+            expect(bjson).to.deep.equal({ block: 'my-block' });
         });
 
     });
@@ -37,14 +37,14 @@ describe('Test converter options', () => {
 
         it('should convert node to elem with `options.scope=true`', () => {
             const tree = { type: 'unknown' };
-            const bjson = toBemjson(tree, { scope: true, root: 'myBlock' });
+            const bjson = toBemjson(tree, { scope: true, root: 'my-block' });
 
             expect(bjson).to.deep.equal({ elem: 'unknown' });
         });
 
         it('should converts mods to elemMods with `options.scope=true`', () => {
             const tree = { type: 'heading', depth: 1 };
-            const bjson = toBemjson(tree, { scope: true, root: 'myBlock' });
+            const bjson = toBemjson(tree, { scope: true, root: 'my-block' });
 
             expect(bjson).to.deep.equal({
                 elem: 'heading',

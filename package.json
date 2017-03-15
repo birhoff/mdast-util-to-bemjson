@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.0",
+    "decamelize": "^1.2.0",
     "detab": "^2.0.0",
     "escape-html": "^1.0.3",
     "highlight.js": "^9.10.0",

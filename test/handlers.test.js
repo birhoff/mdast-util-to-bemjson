@@ -188,4 +188,20 @@ describe('Test node handlers', () => {
             expect(bjson).to.deep.equal({ block: 'list', mods: { type: 'ul' } });
         });
     });
+
+    describe('Test `listItem` handler', () => {
+        it('should convert to list-item', () => {
+            const tree = { type: 'listItem' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'list-item' });
+        });
+
+        it('should convert with `tag:li`', () => {
+            const tree = { type: 'listItem' };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({ block: 'list-item', tag: 'li' });
+        });
+    });
 });

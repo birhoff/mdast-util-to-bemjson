@@ -15,4 +15,11 @@ describe('Common tests', () => {
             content: { block: 'child-node' }
         });
     });
+
+    it('should decamelize node.type', () => {
+        const tree = { type: 'MyNodeType' };
+        const bjson = toBemjson(tree);
+
+        expect(bjson).to.deep.equal({ block: 'my-node-type' });
+    });
 });
