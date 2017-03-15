@@ -308,4 +308,46 @@ describe('Test node handlers', () => {
             expect(bjson).to.deep.equal({ block: 'link', href: 'google.com', title: 'my title' });
         });
     });
+
+    describe('Test `image` handler', () => {
+        it('should convert to block `image`', () => {
+            const tree = { type: 'image', url: 'google.com' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'image', url: 'google.com' });
+        });
+
+        it('should convert to block `image` with tag `img`', () => {
+            const tree = { type: 'image', url: 'google.com' };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({
+                block: 'image',
+                tag: 'img',
+                attrs: { src: 'google.com' },
+                url: 'google.com'
+            });
+        });
+
+        it('should add alt and title', () => {
+            const tree = { type: 'image', url: 'google.com', alt: 'my alt', title: 'my title' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'image', alt: 'my alt', title: 'my title', url: 'google.com' });
+        });
+
+        it('should add alt to attrs', () => {
+            const tree = { type: 'image', url: 'google.com', alt: 'my alt', title: 'my title' };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({
+                block: 'image',
+                tag: 'img',
+                alt: 'my alt',
+                title: 'my title',
+                url: 'google.com',
+                attrs: { alt: 'my alt', src: 'google.com' }
+            });
+        });
+    });
 });
