@@ -71,6 +71,25 @@ describe('Test node handlers', () => {
                 content: [{ block: 'some-node' }, { block: 'some-node2' }]
             });
         });
+
+        it('should convert unhandled nodes to right tags', () => {
+            const tree = {
+                type: 'root', children: [
+                    { type: 'listItem' },
+                    { type: 'paragraph' },
+                    { type: 'emphasis' }
+                ]
+            };
+            const bjson = toBemjson(tree, { tag: true, root: 'my-root' });
+
+            expect(bjson).to.deep.equal({
+                block: 'my-root', content: [
+                    { block: 'list-item', tag: 'li' },
+                    { block: 'paragraph', tag: 'p' },
+                    { block: 'emphasis', tag: 'em' }
+                ]
+            });
+        });
     });
 
     describe('Test `code` handler', () => {
@@ -260,6 +279,22 @@ describe('Test node handlers', () => {
             const bjson = toBemjson(tree);
 
             expect(bjson).to.deep.equal({ block: 'table', align: ['top', 'left'] });
+        });
+    });
+
+    describe('Test `inlineCode` handler', () => {
+        it('should convert to block `code`', () => {
+            const tree = { type: 'inlineCode' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'code' });
+        });
+
+        it('should convert to block `code` with tag `code`', () => {
+            const tree = { type: 'inlineCode' };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({ block: 'code', tag: 'code' });
         });
     });
 });
