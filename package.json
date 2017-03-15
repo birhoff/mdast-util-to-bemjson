@@ -26,6 +26,10 @@
   "bugs": {
     "url": "https://github.com/birhoff/mdast-util-to-bemjson/issues"
   },
+  "files": [
+    "index.js",
+    "lib/**"
+  ],
   "homepage": "https://github.com/birhoff/mdast-util-to-bemjson#readme",
   "devDependencies": {
     "chai": "^3.5.0",
