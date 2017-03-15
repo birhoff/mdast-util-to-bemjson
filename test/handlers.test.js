@@ -285,4 +285,27 @@ describe('Test node handlers', () => {
             expect(bjson).to.deep.equal({ block: 'break', tag: 'br', bem: false });
         });
     });
+
+    describe('Test `link` handler', () => {
+        it('should convert to block `link`', () => {
+            const tree = { type: 'link', url: 'google.com' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'link', href: 'google.com' });
+        });
+
+        it('should convert to block `link` with tag `a`', () => {
+            const tree = { type: 'link', url: 'google.com' };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({ block: 'link', tag: 'a', attrs: { href: 'google.com' }, href: 'google.com' });
+        });
+
+        it('should convert to block `link` with title', () => {
+            const tree = { type: 'link', url: 'google.com', title: 'my title' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'link', href: 'google.com', title: 'my title' });
+        });
+    });
 });
