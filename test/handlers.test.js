@@ -204,4 +204,13 @@ describe('Test node handlers', () => {
             expect(bjson).to.deep.equal({ block: 'list-item', tag: 'li' });
         });
     });
+
+    describe('Test `paragraph` handler', () => {
+        it('should convert with `tag:p`', () => {
+            const tree = { type: 'paragraph' };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({ block: 'paragraph', tag: 'p' });
+        });
+    });
 });
