@@ -24,7 +24,7 @@ Transforms MDAST tree to bemjson regarding to rules.
 
 ## Requirements
 
-* [Node.js 6+](https://nodejs.org/en/)
+* [Node.js 4+](https://nodejs.org/en/)
 
 ## Install
 
