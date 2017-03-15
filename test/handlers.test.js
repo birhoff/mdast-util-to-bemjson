@@ -72,12 +72,14 @@ describe('Test node handlers', () => {
             });
         });
 
-        it('should convert unhandled nodes to right tags', () => {
+        it('should convert unhandled nodes to right blocks and tags', () => {
             const tree = {
                 type: 'root', children: [
                     { type: 'listItem' },
                     { type: 'paragraph' },
-                    { type: 'emphasis' }
+                    { type: 'emphasis' },
+                    { type: 'delete' },
+                    { type: 'inlineCode' }
                 ]
             };
             const bjson = toBemjson(tree, { tag: true, root: 'my-root' });
@@ -86,7 +88,9 @@ describe('Test node handlers', () => {
                 block: 'my-root', content: [
                     { block: 'list-item', tag: 'li' },
                     { block: 'paragraph', tag: 'p' },
-                    { block: 'emphasis', tag: 'em' }
+                    { block: 'emphasis', tag: 'em' },
+                    { block: 'del', tag: 'del' },
+                    { block: 'code', tag: 'code' }
                 ]
             });
         });
@@ -208,22 +212,6 @@ describe('Test node handlers', () => {
         });
     });
 
-    describe('Test `listItem` handler', () => {
-        it('should convert to list-item', () => {
-            const tree = { type: 'listItem' };
-            const bjson = toBemjson(tree);
-
-            expect(bjson).to.deep.equal({ block: 'list-item' });
-        });
-
-        it('should convert with `tag:li`', () => {
-            const tree = { type: 'listItem' };
-            const bjson = toBemjson(tree, { tag: true });
-
-            expect(bjson).to.deep.equal({ block: 'list-item', tag: 'li' });
-        });
-    });
-
     describe('Test `paragraph` handler', () => {
         it('should convert with `tag:p`', () => {
             const tree = { type: 'paragraph' };
@@ -279,22 +267,6 @@ describe('Test node handlers', () => {
             const bjson = toBemjson(tree);
 
             expect(bjson).to.deep.equal({ block: 'table', align: ['top', 'left'] });
-        });
-    });
-
-    describe('Test `inlineCode` handler', () => {
-        it('should convert to block `code`', () => {
-            const tree = { type: 'inlineCode' };
-            const bjson = toBemjson(tree);
-
-            expect(bjson).to.deep.equal({ block: 'code' });
-        });
-
-        it('should convert to block `code` with tag `code`', () => {
-            const tree = { type: 'inlineCode' };
-            const bjson = toBemjson(tree, { tag: true });
-
-            expect(bjson).to.deep.equal({ block: 'code', tag: 'code' });
         });
     });
 
