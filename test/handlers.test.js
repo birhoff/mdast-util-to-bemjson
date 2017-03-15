@@ -297,4 +297,20 @@ describe('Test node handlers', () => {
             expect(bjson).to.deep.equal({ block: 'code', tag: 'code' });
         });
     });
+
+    describe('Test `break` handler', () => {
+        it('should convert to block `break`', () => {
+            const tree = { type: 'break' };
+            const bjson = toBemjson(tree);
+
+            expect(bjson).to.deep.equal({ block: 'break' });
+        });
+
+        it('should convert to block `break` with tag `br` and `bem=false`', () => {
+            const tree = { type: 'break' };
+            const bjson = toBemjson(tree, { tag: true });
+
+            expect(bjson).to.deep.equal({ block: 'break', tag: 'br', bem: false });
+        });
+    });
 });

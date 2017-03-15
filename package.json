@@ -42,7 +42,6 @@
     "detab": "^2.0.0",
     "escape-html": "^1.0.3",
     "highlight.js": "^9.10.0",
-    "mdast-util-definitions": "^1.2.0",
-    "trim": "0.0.1"
+    "mdast-util-definitions": "^1.2.0"
   }
 }
