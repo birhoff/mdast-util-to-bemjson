@@ -1,56 +1,16 @@
-const unified = require('unified');
-const markdown = require('remark-parse');
+'use strict';
 
 const expect = require('chai').expect;
 
-const toBemjson = require('../index');
-
-const processor = unified().use(markdown);
+const toBjast = require('../index');
 
 describe('Test converter options', () => {
-    describe('Test options.root', () => {
+    describe('Test options.augment', () => {
 
-        it('should `options.root=false` convert `root` to `documentation`', () => {
-            const tree = processor.parse('');
-            const bjson = toBemjson(tree);
+        it('should not change flow without option `options.augment`', () => {
+            const bjast = toBjast({ type: 'root' });
 
-            expect(bjson).to.deep.equal({ block: 'documentation' });
+            expect(bjast).to.deep.equal({ block: 'md-root' });
         });
-
-        it('should `options.root=myBlock` convert `root` to `my-block`', () => {
-            const tree = processor.parse('');
-            const bjson = toBemjson(tree, { root: 'my-block' });
-
-            expect(bjson).to.deep.equal({ block: 'my-block' });
-        });
-
-    });
-
-    describe('Test options.scope', () => {
-
-        it('should convert node to block with `options.scope=false`', () => {
-            const tree = { type: 'unknown' };
-            const bjson = toBemjson(tree);
-
-            expect(bjson).to.deep.equal({ block: 'unknown' });
-        });
-
-        it('should convert node to elem with `options.scope=true`', () => {
-            const tree = { type: 'unknown' };
-            const bjson = toBemjson(tree, { scope: true, root: 'my-block' });
-
-            expect(bjson).to.deep.equal({ elem: 'unknown' });
-        });
-
-        it('should converts mods to elemMods with `options.scope=true`', () => {
-            const tree = { type: 'heading', depth: 1 };
-            const bjson = toBemjson(tree, { scope: true, root: 'my-block' });
-
-            expect(bjson).to.deep.equal({
-                elem: 'heading',
-                elemMods: { level: 1 }
-            });
-        });
-
     });
 });

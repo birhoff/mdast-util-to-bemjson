@@ -6,8 +6,8 @@
   "scripts": {
     "pretest": "npm run lint",
     "test": "npm run specs",
-    "specs": "mocha test/**",
-    "cover": "nyc mocha test/**",
+    "specs": "mocha test/",
+    "cover": "nyc mocha test/",
     "lint": "eslint .",
     "release": "standard-version; git push --follow-tags origin master",
     "github-release": "conventional-github-releaser -p angular -r 0"
@@ -46,9 +46,8 @@
     "bluebird": "^3.5.0",
     "decamelize": "^1.2.0",
     "detab": "^2.0.0",
-    "escape-html": "^1.0.3",
     "highlight.js": "^9.10.0",
-    "mdast-util-definitions": "^1.2.0",
+    "lodash": "^4.17.4",
     "normalize-uri": "^1.1.0"
   }
 }
