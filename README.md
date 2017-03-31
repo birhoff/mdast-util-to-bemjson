@@ -1,5 +1,5 @@
 # mdast-util-to-bemjson
-Transforms MDAST tree to bemjson regarding to rules.
+Transforms MDAST tree to bemjson regarding to [rules](/doc/rules.md).
 
 [![NPM Status][npm-img]][npm]
 [![Travis Status][test-img]][travis]
@@ -42,40 +42,40 @@ const toBemjson = require('mdast-util-to-bemjson');
 const mdast = unified().use(markdown).parse('# Hello im _heading_');
 const bjson = toBemjson(mdast);
 
-console.log(JSON.stringify(bjson));
-
-// {
-//   "block": "documentation",
-//   "content": {
-//     "block": "heading",
-//     "mods": {
-//       "level": 1
-//     },
-//     "content": [
-//       "Hello im ",
-//       {
-//         "block": "emphasis",
-//         "content": "heading"
-//       }
-//     ]
-//   }
-// }
+console.log(JSON.stringify(bjson, null, 4));
+```
+Yields:
+```json
+{
+    "block": "md-root",
+    "content": {
+        "block": "heading",
+        "mods": {
+            "level": 1
+        },
+        "level": 1,
+        "content": [
+            "Hello im ",
+            {
+                "block": "emphasis",
+                "content": "heading"
+            }
+        ]
+    }
+}
 ```
 
 ## API
 
-You can specify options with second arg.
-```javascript
-const toBemjson = require('mdast-util-to-bemjson');
+### `toBemjson(mdastTree[, options])`
 
-toBemjson({/* ...tree */}, {/* options */});
-```
+#### `options`
+* *Function* **augment** — callback called on every node.
 
-### Plugin options
+### `augment(bemNode):bemNode`. *Important*: Must return bemNode.
 
-* *String|Object* **root** — Define block wrapper. Default — `documentation`.
-* *Boolean* **scope** — Define how to render nodes as blocks or elements. If `true` render as elements of `root` block. Default — `false`.
-* *Boolean* **tag** — Define render html tags to block. Default — `false`.
+#### `bemNode` - representation of bem entity (block, elem, mod, props)
+
 
 
 License
