@@ -22,16 +22,4 @@ describe('Common tests', () => {
 
         expect(bjson).to.deep.equal({ block: 'my-node-type' });
     });
-
-
-    it('should decamelize!!!1', () => {
-        const unified = require('unified');
-        const markdown = require('remark-parse');
-        const toBemjson = require('../index');
-
-        const mdast = unified().use(markdown).parse('# Hello im _heading_');
-        const bjson = toBemjson(mdast);
-
-        console.log(JSON.stringify(bjson, null, 4));
-    });
 });
