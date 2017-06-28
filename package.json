@@ -36,7 +36,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^3.15.0",
-    "eslint-config-birhoff": "0.0.1",
+    "eslint-config-birhoff": "0.1.0",
     "mocha": "^3.2.0",
     "nyc": "^11.0.2",
     "remark-parse": "^3.0.0",
