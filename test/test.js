@@ -1,5 +1,8 @@
 'use strict';
 
+const describe = require('mocha').describe;
+const it = require('mocha').it;
+
 const expect = require('chai').expect;
 
 const toBemjson = require('../index');
@@ -21,5 +24,28 @@ describe('Common tests', () => {
         const bjson = toBemjson(tree);
 
         expect(bjson).to.deep.equal({ block: 'my-node-type' });
+    });
+
+    it('should extend context with hProps', () => {
+        const tree = { type: 'MyNodeType', data: { htmlAttributes: { id: '222' }, hProperties: { prop: 1 } } };
+        const bjson = toBemjson(tree);
+
+        expect(bjson).to.deep.equal({
+            attrs: {
+                id: '222'
+            },
+            block: 'my-node-type',
+            data: {
+                hProperties: {
+                    prop: 1
+                },
+                htmlAttributes: {
+                    id: '222'
+                }
+            },
+            hProps: {
+                prop: 1
+            }
+        });
     });
 });
