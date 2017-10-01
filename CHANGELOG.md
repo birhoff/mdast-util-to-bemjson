@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/birhoff/mdast-util-to-bemjson/compare/v0.2.1...v0.3.0) (2017-10-01)
+
+
+### Features
+
+* **core:** Extend hProperties and htmlAttributes from other plugins to context ([4db161c](https://github.com/birhoff/mdast-util-to-bemjson/commit/4db161c))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/birhoff/mdast-util-to-bemjson/compare/v0.2.0...v0.2.1) (2017-03-31)
 
